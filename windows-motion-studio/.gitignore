@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.spec
+build/
+dist/
+.venv/
+*.log
+*.pid
+*.port
+.pytest_cache/
+local_profiles.json

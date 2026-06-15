@@ -1,0 +1,18 @@
+[project]
+name = "windows-motion-studio"
+version = "0.2.0"
+description = "A small Windows desktop utility for motion profiles, UI tuning experiments, and personal desktop customization."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "kotorin-Y" }]
+dependencies = []
+
+[project.scripts]
+windows-motion-studio = "windows_motion_studio.app:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
