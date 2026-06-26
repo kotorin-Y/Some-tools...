@@ -1,0 +1,81 @@
+{
+  "user_agent": "CommentCrawler/1.0 (+research; contact: your-email@example.com)",
+  "sources": [
+    {
+      "name": "demo_html_comments",
+      "platform": "示例平台",
+      "target": "示例游戏评论区",
+      "mode": "html",
+      "rating_max": 5,
+      "delay_seconds": 1,
+      "max_pages": 1,
+      "start_urls": [
+        "sample_comments.html"
+      ],
+      "html": {
+        "comment_xpath": "//article[contains(@class,'comment')]",
+        "fields": {
+          "comment_id": {
+            "xpath": "./@data-id"
+          },
+          "author": {
+            "xpath": ".//*[contains(@class,'author')]/text()"
+          },
+          "rating": {
+            "xpath": ".//*[contains(@class,'rating')]/@data-score",
+            "type": "float"
+          },
+          "created_at": {
+            "xpath": ".//time/@datetime",
+            "type": "date"
+          },
+          "content": {
+            "xpath": ".//*[contains(@class,'content')]//text()",
+            "join": " "
+          },
+          "comment_url": {
+            "xpath": ".//a[contains(@class,'permalink')]/@href",
+            "type": "url"
+          }
+        },
+        "next_page_xpath": "//a[@rel='next']/@href"
+      }
+    },
+    {
+      "name": "demo_json_api",
+      "platform": "示例API平台",
+      "target": "示例接口评论",
+      "mode": "json",
+      "rating_max": 5,
+      "delay_seconds": 1,
+      "url_template": "https://example.com/api/comments?page={page}",
+      "page_url_template": "https://example.com/game/reviews?page={page}",
+      "pagination": {
+        "start": 1,
+        "step": 1,
+        "max_pages": 2
+      },
+      "json": {
+        "items_path": "data.comments",
+        "fields": {
+          "comment_id": "id",
+          "author": "user.name",
+          "rating": {
+            "path": "score",
+            "type": "float"
+          },
+          "created_at": {
+            "path": "created_at",
+            "type": "date"
+          },
+          "content": "content",
+          "comment_url": {
+            "path": "url",
+            "type": "url"
+          }
+        },
+        "next_url_path": "data.next_url"
+      }
+    }
+  ]
+}
